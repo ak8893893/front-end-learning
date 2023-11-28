@@ -1,0 +1,59 @@
+<!DOCTYPE html>                       
+<html>                                 
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--控制網頁的縮放-->
+        <meta charset="utf-8" />
+        <title>JavaScript 運算符號</title>
+    </head>
+    <body>
+        <!--Javascript寫在script標籤裡面   寫在哪裡都可以   但有個習慣是會寫在body的最下方-->
+        <script>
+            // 算術運算: +,-,*,/,%
+            let x=7%3;
+            console.log(x);
+            
+            // 指定運算 : =, +=, -=, *=, /=, %=
+            x=x+1; // x+=1
+            x-=4;
+            console.log(x);
+
+            // 比較運算: >, <, >=, <=, ==, !=
+            x=3==4;
+            console.log(x);
+
+            // 單元運算 : !, ++ ,--
+            x=true;
+            x=!x;
+            console.log(x);
+            x=3;
+            x++;
+            console.log(x);
+
+            // 邏輯運算: &&, ||
+            let test=true && true;
+            console.log(test);
+
+            let ks = true || false;
+            console.log(ks);
+
+
+            // 請使用者輸入兩個數字，得到乘法的結果  (互動三要素 input processing output)
+            // 要求使用者輸入: prompt(字串,字串)
+            //prompt("請輸入一個數字","預設值");
+
+            let y=prompt("請輸入一個數字1","預設值");
+            let z=prompt("請輸入一個數字2","預設值");
+
+            y= Number(y);
+            z= Number(z);
+
+            console.log("數字1+數字2為: ",y+z);
+
+            let n1=prompt("A","");
+            let n2=prompt("B","");
+
+            console.log(n1*n2);
+
+        </script>
+    </body>
+</html>
