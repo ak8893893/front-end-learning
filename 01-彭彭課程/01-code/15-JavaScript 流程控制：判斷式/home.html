@@ -1,0 +1,32 @@
+<!DOCTYPE html>                       
+<html>                                 
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--控制網頁的縮放-->
+        <meta charset="utf-8" />
+        <title>JavaScript 流程控制：判斷式</title>
+    </head>
+    <body>
+        <!--Javascript寫在script標籤裡面   寫在哪裡都可以   但有個習慣是會寫在body的最下方-->
+        <script>
+            // if 判斷式的基本語法
+            if(false){
+                console.log("Hello");
+            }
+            console.log("Outside");
+
+            // ATM 模擬
+            let money=prompt("要領多少錢","");
+
+            if (money<=100000 && money >=100){
+                console.log("OK");
+            }else if(money<=100 && money>=0){
+                console.log("至少要領一百元")
+            }else if (money>100000){
+                console.log("太多了不能領")
+            }else{
+                console.log("不OK，低於一百或是負數或是輸入錯誤")
+            }
+
+        </script>
+    </body>
+</html>
