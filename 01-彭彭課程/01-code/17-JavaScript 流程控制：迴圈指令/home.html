@@ -1,0 +1,31 @@
+<!DOCTYPE html>                       
+<html>                                 
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--控制網頁的縮放-->
+        <meta charset="utf-8" />
+        <title>JavaScript 流程控制：迴圈基礎</title>
+    </head>
+    <body>
+        <!--Javascript寫在script標籤裡面   寫在哪裡都可以   但有個習慣是會寫在body的最下方-->
+        <script>
+            // break 指令  直接離開迴圈  到迴圈後一行
+            let n=0;
+            while(n<5){
+                if(n==3){
+                    break;
+                }
+                console.log(n);
+                n++;
+            }
+
+            // continue 指令   直接進到下一圈初始
+            for(let n=0;n<5;n++){
+                if (n%2==0){
+                    continue; 
+                }
+                console.log(n);
+            }
+
+        </script>
+    </body>
+</html>
