@@ -1,0 +1,39 @@
+<!DOCTYPE html>                       
+<html>                                 
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--控制網頁的縮放-->
+        <meta charset="utf-8" />
+        <title>JavaScript 函式回傳值</title>
+    </head>
+    <body>
+        <!--Javascript寫在script標籤裡面   寫在哪裡都可以   但有個習慣是會寫在body的最下方-->
+        <script>
+            // return 用來結束函式
+            function test(){
+                console.log("Hello");
+                return 3;
+            }
+            test();
+            console.log(test());
+
+
+            function divide(n1,n2){
+                let result=n1/n2;
+                console.log(result);
+                return result;
+            }
+            let ans= divide(4,2);
+            console.log(ans);
+
+
+            function divide2(n1,n2){
+                let result=n1/n2;
+                return result;
+            }
+            let ans2= divide2(8,2);
+            ans2*=10
+            console.log(ans2);
+
+        </script>
+    </body>
+</html>
