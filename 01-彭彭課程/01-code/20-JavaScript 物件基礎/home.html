@@ -1,0 +1,40 @@
+<!DOCTYPE html>                       
+<html>                                 
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--控制網頁的縮放-->
+        <meta charset="utf-8" />
+        <title>JavaScript 物件基礎</title>
+    </head>
+    <body>
+        <!--Javascript寫在script標籤裡面   寫在哪裡都可以   但有個習慣是會寫在body的最下方-->
+        <script>
+            // 建立物件
+            let man = new Object();  // 建立空白物件 new Object()
+            man.age=18;              // 物件.成員名稱=資料
+            man.name="小王";
+            man.talk=function(){
+                console.log("hello 我是", this.name , "今年", this.age,"歲")
+            }
+
+
+            // 使用物件
+            console.log(man);
+            man.talk();                 
+            console.log(man.age>20);    
+            
+            // 使用 JSON 建立物件
+            let woman={
+                age:15,
+                name:"小芬",
+                talk:function(){
+                    console.log("hello 我是", this.name , "今年", this.age,"歲")
+                }
+            }
+
+            console.log(woman);
+            woman.talk();                 
+            console.log(woman.age>20);   
+
+        </script>
+    </body>
+</html>
