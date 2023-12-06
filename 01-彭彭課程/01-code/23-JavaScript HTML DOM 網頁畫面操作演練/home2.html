@@ -1,0 +1,45 @@
+<!DOCTYPE html>                       
+<html>                                 
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--控制網頁的縮放-->
+        <meta charset="utf-8" />
+        <title>JavaScript HTML DOM 網頁畫面操作演練</title>
+
+    </head>
+    <body>
+        <div>
+            <span onclick="changeToAbout()" style="color: rgb(255, 81, 0);">關於我</span>
+            <span onclick="changeToExps()" style="color: rgb(55, 0, 255);">學經歷</span>
+        </div>
+        <hr/>
+        <div id="about">大家好，我是彭彭</div>
+        <div id="exps" style="display: none;">我是心理系畢業，後來當軟體工程師</div>
+
+
+        <script>
+            function changeToAbout(){
+                // 先取得要操作的標籤
+                let aboutDiv=document.querySelector("#about");
+                let expsDiv=document.querySelector("#exps");
+
+                // 再對標籤進行操作
+                aboutDiv.style.display="block";
+                expsDiv.style.display="none";
+            }
+
+
+            function changeToExps(){
+                // 先取得要操作的標籤
+                let aboutDiv=document.querySelector("#about");
+                let expsDiv=document.querySelector("#exps");
+
+                // 再對標籤進行操作
+                aboutDiv.style.display="none";
+                expsDiv.style.display="block";
+            }
+
+            
+
+        </script>
+    </body>
+</html>
