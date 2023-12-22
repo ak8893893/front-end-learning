@@ -1,0 +1,39 @@
+<!DOCTYPE html>                       
+<html>                                 
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--控制網頁的縮放-->
+        <meta charset="utf-8" />
+        <title>JavaScript AJAX</title>
+        <style>
+            .btn{
+                background-color: palegreen;
+                padding: 8px;border-radius: 5px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <h3>AJAX</h3>
+        <button onclick="getData();">連線取得資料</button>
+        <div id="result"></div>
+        <script>
+            function getData(){
+                // 利用 fetch 進行連線並取得資料
+                fetch("https://cwpeng.github.io/live-records-samples/data/products.json").then(function(response){
+                    return response.json();
+                }).then(function(data){
+                    // 已經取得資料，把資料呈現到畫面上
+                    let result=document.querySelector('#result');
+                    result.innerHTML=""
+                    for (let i=0;i<data.length;i++){
+                        let product=data[i];
+                        console.log(product)
+                        result.innerHTML+="<div>"+product.name+","+product.price+","+product.description+"</dev>"
+                    }
+                    //console.log(data);
+                });
+            }
+        </script>
+        
+    </body>
+</html>
