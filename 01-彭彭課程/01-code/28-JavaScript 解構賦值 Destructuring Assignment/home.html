@@ -1,0 +1,84 @@
+<!DOCTYPE html>                       
+<html>                                 
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--控制網頁的縮放-->
+        <meta charset="utf-8" />
+        <title>JavaScript 解構賦值 Destructuring Assignment</title>
+        <style>
+
+        </style>
+    </head>
+    <body>
+
+        <script>
+            // 陣列的解構賦值
+            // let arr = [3,4,5];
+            // let d1 = arr[0];
+            // let d2 = arr[0];
+            // let d3 = arr[0];
+            // console.log(d1,d2,d3);
+
+            let arr = [3,4,5,2];
+            let [d1,d2,d3]=arr;
+            console.log(d1,d2,d3);
+
+            let d4,d5,d6,d7;
+            [d4,d5,d6,d7=10]=arr;
+            console.log(d4,d5,d6,d7);
+
+            // 變數資料交換
+            let n1 = 3;
+            let n2 = 4;
+            [n1,n2] = [n2,n1];
+            console.log(n1,n2);            
+
+            // 物件的解構賦值
+            let obj = {x:3,y:4};
+            let x=obj.x;
+            let y=obj.y;
+
+            console.log(x,y);
+
+            // 和物件屬性名稱一樣的話可以自動對應
+            let obj2 = {a:8,b:10};
+            let{a,b} = obj2;
+
+            console.log(a,b);
+
+            let obj3= {c:6,d:12,f:5};
+            let c,d,f;
+            ({c,d,f=152}=obj3);    // 小括號一定要  才能用這種解構賦值的寫法
+
+            console.log(c,d,f);
+
+            // 用不同的屬性名稱來做解構賦值
+            let objNew={x:8,y:12,z:15};
+            let newX,newY,newZ;
+
+            ({x:newX,y:newY,z:newZ=5}=objNew);
+
+            console.log(newX,newY,newZ);
+
+            // 統整函式的物件參數
+            function add(n1,n2){
+                console.log(n1+n2);
+            }
+
+            add(3,4);
+
+            // 多參數函數可以寫成這樣
+            function add2(args){
+                console.log(args.n1+args.n2);
+            }
+            add2({n1:3,n2:4});
+
+            // 解構賦值 又想物件當參數但又不想要程式碼太複雜   就要用解構賦值
+            function add3({n1,n2}){
+                console.log(n1+n2);
+            }
+            add3({n1:5,n2:8})
+
+        </script>
+        
+    </body>
+</html>
