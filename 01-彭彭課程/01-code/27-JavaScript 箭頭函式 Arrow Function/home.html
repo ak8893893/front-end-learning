@@ -1,0 +1,53 @@
+<!DOCTYPE html>                       
+<html>                                 
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--控制網頁的縮放-->
+        <meta charset="utf-8" />
+        <title>JavaScript 箭頭函式 Arrow Function</title>
+        <style>
+
+        </style>
+    </head>
+    <body>
+
+        <script>
+        // function calculate(start,end){
+        //     // 計算 1+2+3+...+10 的結果
+        //     let result=0;
+        //     let n = start;
+        //     while(n<=end){
+        //         result+=n;
+        //         n++;
+        //     }
+            
+        //     return result;
+        // };
+
+        // 箭頭函式的寫法
+
+        let calculate=(start,end)=>{
+            // 計算 1+2+3+...+10 的結果
+            let result=0;
+            let n = start;
+            while(n<=end){
+                result+=n;
+                n++;
+            }
+            
+            return result;
+        };
+
+        let ans1 = calculate(1,10);  // 1+2+3+...+10
+        let ans2 = calculate(1,20);  // 1+2+3+...+20
+        console.log(ans1, ans2);
+
+        // 簡化的箭頭函式寫法
+
+        let multiply=(n1,n2)=>(n1*n2)
+
+        console.log(multiply(2,3))
+
+        </script>
+        
+    </body>
+</html>
