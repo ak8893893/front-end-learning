@@ -1,0 +1,42 @@
+<!DOCTYPE html>                       
+<html>                                 
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--控制網頁的縮放-->
+        <meta charset="utf-8" />
+        <title>JavaScript 物件的淺拷貝、深拷貝</title>
+        <style>
+
+        </style>
+    </head>
+    <body>
+
+        <script>
+            // 淺拷貝 Shallow Copy 的觀察測試
+            let a = [0,1,{x:2,y:3}];       // 有兩層的物件結構
+            let b = {...a};
+
+            console.log(b[2]);
+            // 證明第一層的資料會真正的拷貝
+            b[0]=10;
+            console.log(a[0]);   //  不會影響   會印出 0
+
+            // 證明第二層以及以上更多層的資料，不會被真正的拷貝
+            b[2].x=20;
+            console.log(a[2].x);  // 會影響，所以印出 20
+            
+
+            // 深拷貝 Deep Copy 的觀察測試
+            let c = [0,1,{x:2,y:3}];
+            let str = JSON.stringify(c);
+            let d = JSON.parse(str);        // 完成深拷貝 : 所有層次的資料都會被真正的拷貝
+            // let d = JSON.parse(JSON.stringify(c));
+
+            // 證明第二層的資料也會被真正的拷貝
+            d[2].x=20;
+            console.log(c[2].x);  // 不會影響，所以印出 2
+
+            // 但有些東西不能序列化   例如 function   Symbol這些  就要用別的方式深拷貝
+        </script>
+        
+    </body>
+</html>
