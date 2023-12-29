@@ -1,0 +1,33 @@
+<!DOCTYPE html>                       
+<html>                                 
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--控制網頁的縮放-->
+        <meta charset="utf-8" />
+        <title>使用回呼函式處理非同步程式</title>
+        <style>
+
+        </style>
+    </head>
+    <body>
+
+        <script>
+            function getData(callback){
+                let req = new XMLHttpRequest();
+                req.open("get","https://training.pada-x.com/resources/javascript-es6-react/data.out");
+                req.onload=function(){
+                    callback(this.responseText);
+                };
+                req.send();
+            }
+
+            let showData=(data)=>{
+                alert(data);
+            }
+
+            let result = getData(showData);
+            alert(result);
+
+        </script>
+        
+    </body>
+</html>

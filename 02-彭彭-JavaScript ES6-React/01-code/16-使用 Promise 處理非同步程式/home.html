@@ -1,0 +1,47 @@
+<!DOCTYPE html>                       
+<html>                                 
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--控制網頁的縮放-->
+        <meta charset="utf-8" />
+        <title>使用 Promise 處理非同步程式</title>
+        <style>
+
+        </style>
+    </head>
+    <body>
+
+        <script>
+            function getData(callback){
+                return new Promise(function(resolve, reject){
+                    let req = new XMLHttpRequest();
+                    req.open("get","https://training.pada-x.com/resources/javascript-es6-react/data.out");
+                    req.onload=function(){
+                        resolve(this.responseText);
+                    };
+                    req.onerror=function(){
+                        reject("Error");
+                    }
+                    req.send();
+                });
+            }
+
+            let promise = getData();
+
+            // 用 then 做成功和失敗的處理
+            // promise.then(function(result){
+            //     console.log(result);
+            // },function(error){
+            //     console.log(error);
+            // });
+
+            // 用 then 處理成功  catch 處理失敗
+            promise.then(function(result){
+                console.log(result);
+            }).catch(function(err){
+                console.log(err);
+            });
+
+        </script>
+        
+    </body>
+</html>

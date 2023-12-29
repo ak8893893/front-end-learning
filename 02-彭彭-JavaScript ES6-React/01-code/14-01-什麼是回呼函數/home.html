@@ -1,0 +1,30 @@
+<!DOCTYPE html>                       
+<html>                                 
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--控制網頁的縮放-->
+        <meta charset="utf-8" />
+        <title>了解原型鍊 Prototype Chain</title>
+        <style>
+
+        </style>
+    </head>
+    <body>
+
+        <script>
+            // 定義一個函數
+            function greeting(name) {
+            alert("Hello " + name);
+            }
+
+            // 回呼函數的意思是把函數當成參數來使用
+            function processUserInput(callback) {
+            var name = prompt("輸入你的名字：");
+            callback(name);
+            }
+
+            // 參數放入函數名稱(注意不要有後面的小括號  有小括號代表呼叫函數 沒有代表參數放入函數)
+            processUserInput(greeting);
+        </script>
+        
+    </body>
+</html>

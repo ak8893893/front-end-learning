@@ -1,0 +1,36 @@
+<!DOCTYPE html>                       
+<html>                                 
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--控制網頁的縮放-->
+        <meta charset="utf-8" />
+        <title>了解原型鍊 Prototype Chain</title>
+        <style>
+
+        </style>
+    </head>
+    <body>
+
+        <script>
+            // 定義一個類別
+            class Car{
+                constructor(color){this.color=color;}
+                run(){}
+            }
+
+            // 產生類別物件
+            let car = new Car("Green");
+
+            // 取得並再將原型物件顯示出來
+            let carProto=Object.getPrototypeOf(car); // Car 的原型物件
+            console.log(carProto);
+            
+            let objProto=Object.getPrototypeOf(carProto);  // Object 原型物件
+            console.log(objProto);
+
+            let lastOne=Object.getPrototypeOf(objProto);   // 原型鍊的終點: null
+            console.log(lastOne);
+            
+        </script>
+        
+    </body>
+</html>
