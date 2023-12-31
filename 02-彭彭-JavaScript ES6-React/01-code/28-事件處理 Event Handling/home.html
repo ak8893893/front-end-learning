@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>事件處理 Event Handling</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- Don't use this in production: -->
+    <!-- 載入 Babel 編譯器套件 -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- css 的部分跟之前一樣寫法-->
+    <style type="text/css">
+        .head-3{font-size:1.2em;font-weight:bold;}
+    </style>
+    
+    <!-- 包含 JSX 語法的 JavaScript 必須使用 type="text/babel" -->
+    <script type="text/babel">
+        // 設計組件類別
+        class MyHead extends React.Component{
+            constructor(props){
+                super(props);
+                this.state={color:"red"};
+            }
+
+            render(){
+                // return React.createElement("div", {className:"head" , style:{color:this.props.color}}, "Hello World " + this.props.level);
+                return <div className={"head-"+this.props.level} 
+                    style = {{color:this.state.color}}
+                    onClick = {this.clickHandler.bind(this)}
+                    onMouseOver={this.mouseOverHandler.bind(this)}
+                    onMouseOut={this.mouseOutHandler.bind(this)}>Hello Component</div>
+            }
+
+            clickHandler(e){  // e 是事件物件  不一定用的到  先寫出來
+                //alert("Clicked");    // 測試點擊事件是否被觸發
+
+                // 當使用者點擊，把顏色換掉
+                this.setState({color:"blue"});
+            }
+
+            // 滑鼠放上去會變色
+            mouseOverHandler(e){
+                this.setState({color:"blue"});
+            }
+
+            // 滑鼠移出顏色變回來
+            mouseOutHandler(e){
+                this.setState({color:"red"})
+            }
+        }
+
+        window.addEventListener("load",()=>{
+            ReactDOM.render(<MyHead level="3" />, document.body);
+        })
+    </script>
+</head>
+
+<body>
+    <script >
+
+    </script>
+
+</body>
+</html>
