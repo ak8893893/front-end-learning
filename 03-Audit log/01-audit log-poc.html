@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Audit Log React App</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+        class AuditLog extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    data: null
+                };
+            }
+
+            componentDidMount() {
+                fetch('https://cwpeng.github.io/live-records-samples/data/products.json')
+                    .then(response => response.json())
+                    .then(data => this.setState({ data }));
+            }
+
+            render() {
+                const { data } = this.state;
+                return (
+                    <div>
+                        <h1>Audit Log</h1>
+                        {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(<AuditLog />, document.getElementById('app'));
+    </script>
+</body>
+</html>
