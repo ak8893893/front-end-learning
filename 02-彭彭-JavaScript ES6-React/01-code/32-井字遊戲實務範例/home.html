@@ -103,6 +103,7 @@
 					}
 				});
 			}
+			// 檢查是否有贏家誕生的 method
 			checkWinner(marks){
 				/*
 					若有贏家，回傳
@@ -115,7 +116,7 @@
 					6 7 8
 				*/
 				// 偵測水平方向的三條線是否有相同的標記
-				let index;
+				//let index;
 				for(let y=0;y<3;y++){
 					if(marks[y*3]!==-1&&marks[y*3]===marks[y*3+1]&&marks[y*3+1]===marks[y*3+2]){
 						return {side:marks[y*3], startIndex:y*3, endIndex:y*3+2};
