@@ -49,7 +49,7 @@
 				return <div className="cell" onClick={this.click.bind(this)}>{text}</div>
 			}
 			
-			// 這段還看不太懂目的
+			// 點擊後更新Cell的資訊  更新第[index]格的資訊
 			click(){
 				this.props.update(this.props.index);
 			}
@@ -78,10 +78,8 @@
 				let cells=[];
 				
 				// 利用屬性傳遞框框的編號 (index), 框框的標記(mark) 和更新的回呼函式(update)
-				for (let i=0;i<this.state.marks.length;i++){
-					
+				for (let i=0;i<this.state.marks.length;i++){					
 					cells.push(<Cell index={i} mark={this.state.marks[i]} update={this.updateMark.bind(this)} />);
-					//console.log(this.state.marks[i]);
 				}
 
 				// 利用屬性傳遞線段的開頭框框編號(startIndex) 和結束框框 (endIndex) 給 Line 組件
