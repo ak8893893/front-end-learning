@@ -45,7 +45,7 @@
 				// 狀態已經在redux 那邊做完更新了 串接回 react 物件中更新組件和畫面
 				this.setState(store.getState());
 			}
-			domponentDidMount(){
+			componentDidMount(){
 				// 當 Redux 的狀態有所變化的時候，會通知/呼叫 refresh 方法
 				this.unsubscribe=store.subscribe(this.refresh.bind(this));
 			}
