@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Redux 列表介面</title>
+	<script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+	<script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+	<!-- 載入 Redux 套件 -->
+	<script src="https://unpkg.com/redux@3.7.2/dist/redux.min.js"></script>
+	<script type="text/babel">
+		// MyHead 組件，根據 props 中的資料顯示列表文字
+		class MyHead extends React.Component{
+			constructor(props){
+				super(props);
+			}
+			render(){
+				return <li>Hello World {this.props.level}</li>;
+			}
+		}
+		// MyHeadList 組件，根據 state 中的資料決定要顯示多少列表項目
+		class MyHeadList extends React.Component{
+			constructor(props){
+				super(props);
+				this.state=store.getState(); // 透過 redux 取得狀態
+			}
+			render(){
+				let cells=[];
+				for(let i=0;i<this.state.max;i++){
+					cells.push(<MyHead level={i}/>);
+				}
+
+				return <ul onClick={this.update.bind(this)}>{cells}</ul>;
+			}
+			update(){
+				// 命令 Redux 更新狀態
+				store.dispatch({
+					type:"ChangeMax",
+					max:5
+				});
+			}
+
+			// 以下是 react 和 redux 的連接點
+			refresh(){ 
+				// 狀態已經在redux 那邊做完更新了 串接回 react 物件中更新組件和畫面
+				this.setState(store.getState());
+			}
+			domponentDidMount(){
+				// 當 Redux 的狀態有所變化的時候，會通知/呼叫 refresh 方法
+				this.unsubscribe=store.subscribe(this.refresh.bind(this));
+			}
+			componentWillUmount(){
+				// 清除串接點
+				this.unsubscribe();
+			}
+		}
+
+		// 以下是 Redux 程式 皆為全域變數
+		let store;
+		let reducer=function(state, action){
+			// 根據 action 的 type, 來執行狀態更新的動作
+			switch (action.type){
+				case "ChangeMax":
+					return {max:action.max};
+				default:
+					return state;
+			}
+		};
+		
+		// 以下是網頁的初始化程式
+		window.addEventListener("load", ()=>{
+			
+			// 初始化 Redux 建立Redux 狀態儲存物件
+			store=Redux.createStore(reducer,{max:3});
+
+			// 初始化 React 的畫面
+			ReactDOM.render(<MyHeadList/>, document.body);
+		});
+	</script>
+</head>
+<body>
+</body>
+</html>

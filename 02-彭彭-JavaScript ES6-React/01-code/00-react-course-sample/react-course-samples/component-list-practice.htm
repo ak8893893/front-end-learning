@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>組件的生命週期</title>
+</head>
+<body>
+		<script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+		<script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+		<script>
+			class MyItem extends React.Component{
+				render(){
+					return React.createElement("li", null, "Item "+this.props.index);
+				}
+			}
+			class MyList extends React.Component{
+				constructor(props){
+					super(props);
+					this.state={max:5};
+					window.setTimeout(()=>{
+						this.setState({max:7});
+					}, 2000);
+				}
+				render(){
+					let items=[];
+					for(let i=1;i<this.state.max;i++){
+						items.push(React.createElement(MyItem, {index:i}));
+					}
+					return React.createElement("ul", null, items);
+				}
+			}
+			window.addEventListener("load", ()=>{
+				// 1. 建立 MyList 組件
+				let app=React.createElement(MyList);
+				// 2. 將建立好的 MyList 組件實體畫到容器中
+				ReactDOM.render(app, document.body);
+			});
+		</script>
+</body>
+</html>

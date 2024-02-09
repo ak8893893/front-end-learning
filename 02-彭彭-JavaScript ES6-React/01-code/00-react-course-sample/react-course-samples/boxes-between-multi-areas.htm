@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Boxes between MultiArea</title>
+	<style type="text/css">
+		.area{
+			width:300px;height:300px;margin:10px;
+			display:inline-block;vertical-align:top;border:1px solid black;
+		}
+		.area>.box{
+			width:50px;height:50px;margin:5px;background-color:red;
+			display:inline-block;vertical-align:top;
+		}
+	</style>
+	<script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+	<script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+	<script src="https://unpkg.com/redux@3.7.2/dist/redux.min.js"></script>
+	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+	<script type="text/babel">
+		class Box extends React.Component{
+			constructor(props){
+				super(props);
+				this.state={position:"static", left:"auto", top:"auto"};
+			}
+			render(){
+				return <div className="box"
+					style={{position:this.state.position, left:this.state.left, top:this.state.top}}
+					onMouseDown={this.drag.bind(this)}>{this.props.count}</div>;
+			}
+			drag(e){
+				e.stopPropagation(); e.preventDefault();
+				let box=e.currentTarget;
+				let start={x:e.clientX, y:e.clientY};
+				this.setState({position:"relative"});
+				let move=(e)=>{
+					this.setState({left:(e.clientX-start.x)+"px", top:(e.clientY-start.y)+"px"});
+				};
+				let end=(e)=>{
+					this.props.choose(box, this.props.count, this.props.index, this.props.groupIndex);
+					this.setState({position:"static", left:"auto", top:"auto"});
+					document.removeEventListener("mousemove", move);
+					document.removeEventListener("mouseup", end);
+				};
+				document.addEventListener("mousemove", move);
+				document.addEventListener("mouseup", end);
+			}
+		}
+		class Desktop extends React.Component{
+			constructor(props){
+				super(props);
+				this.areas=[{},{},{}];
+				this.state=redux.store.getState();
+			}
+			render(){
+				let areas=[];
+				for(let i=0;i<this.areas.length;i++){
+					areas.push(<div className="area"
+						ref={(element)=>{this.areas[i]=element}}>
+						{this.state.boxes[i].map((count, index)=>
+							<Box count={count} index={index} groupIndex={i} choose={this.choose.bind(this)} />
+						)}
+					</div>);
+				}
+				return <div>
+					<button onClick={this.add.bind(this)}>Add</button>
+					<div>{areas}</div>
+				</div>
+			}
+			add(){
+				redux.store.dispatch({type:redux.action.ADD_BOX});
+			}
+			choose(box, count, index, groupIndex){
+				redux.store.dispatch({
+					type:redux.action.CHANGE_GROUP,
+					areas:this.areas,
+					box:box,
+					count:count,
+					index:index,
+					groupIndex:groupIndex
+				});
+			}
+			update(){
+				this.setState(redux.store.getState());
+			}
+			componentDidMount(){
+				this.unsubscribe=redux.store.subscribe(this.update.bind(this));
+			}
+			componentWillUnmount(){
+				this.unsubscribe();
+			}
+		}
+		let redux={
+			store:null,
+			initState:{
+				count:1,
+				boxes:[[],[],[]]
+			},
+			reducer:function(state, action){
+				switch(action.type){
+					case redux.action.ADD_BOX:
+						state.boxes[0].push(state.count);
+						return Object.assign({}, state, {
+							boxes:state.boxes,
+							count:state.count+1
+						});
+					case redux.action.CHANGE_GROUP:
+						let boxRect=action.box.getBoundingClientRect();
+						let rect;
+						let changed=false;
+						for(let i=0;i<action.areas.length;i++){
+							rect=action.areas[i].getBoundingClientRect();
+							if(boxRect.left>rect.left&&boxRect.right<rect.right&&boxRect.top>rect.top&&boxRect.bottom<rect.bottom){
+								state.boxes[action.groupIndex].splice(action.index, 1);
+								state.boxes[i].push(action.count);
+								changed=true;
+								break;
+							}
+						}
+						if(changed){
+							return Object.assign({}, state, {
+								boxes:state.boxes
+							});
+						}else{
+							return state;
+						}
+					default:
+						return state;
+				}
+			},
+			action:{
+				ADD_BOX:"addBox", CHANGE_GROUP:"changeGroup"
+			}
+		};
+		window.addEventListener("load", ()=>{
+			redux.store=Redux.createStore(redux.reducer, redux.initState);
+			ReactDOM.render(<Desktop/>, document.body);
+		});
+	</script>
+</head>
+<body>
+</body>
+</html>

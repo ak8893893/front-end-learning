@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Search</title>
+	<style type="text/css">
+	</style>
+	<script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+	<script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+	<script type="text/babel">
+		class SearchBox extends React.Component{
+			constructor(props){
+				super(props);
+			}
+			render(){
+				return <input type="text" onInput={this.props.inputCallback} />;
+			}
+		}
+		class ListBox extends React.Component{
+			constructor(props){
+				super(props);
+			}
+			render(){
+				let list=[];
+				for(let i=0;i<this.props.data.length;i++){
+					if(this.props.data[i].indexOf(this.props.filter)>-1){
+						list.push(<li>{this.props.data[i]}</li>);
+					}
+				}
+				return <ul>{list}</ul>;
+			}
+		}
+		class SearchList extends React.Component{
+			constructor(props){
+				super(props);
+				this.state={data:[
+					"Today is a good day.",
+					"Today is a bad day.",
+					"React is a good library"
+				], filter:null};
+			}
+			render(){
+				return <div>
+					<SearchBox inputCallback={this.input.bind(this)}></SearchBox>
+					<ListBox data={this.state.data} filter={this.state.filter}></ListBox>
+				</div>;
+			}
+			input(e){
+				let input=e.currentTarget.value;
+				this.setState({filter:input});
+			}
+		}
+		window.addEventListener("load", ()=>{
+			ReactDOM.render(<SearchList/>, document.body);
+		});
+	</script>
+</head>
+<body>
+</body>
+</html>

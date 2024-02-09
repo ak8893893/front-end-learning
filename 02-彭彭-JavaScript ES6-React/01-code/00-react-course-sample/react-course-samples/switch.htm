@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Switch</title>
+	<style type="text/css">
+		.switch{background-color:#cccccc;width:60px;height:30px;border-radius:15px;transition:background-color 0.5s;}
+		.switch>.btn{background-color:#444444;width:30px;height:30px;border-radius:15px;transition:margin-left 0.5s;}
+		.switch-on{background-color:#aaffaa;}
+		.switch-on>.btn{background-color:#006600;margin-left:30px;}
+	</style>
+	<script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+	<script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+	<script type="text/babel">
+		class Button extends React.Component{
+			render(){
+				return <div className="btn"></div>
+			}
+		}
+		class Switch extends React.Component{
+			constructor(props){
+				super(props);
+				this.state={on:false};
+			}
+			render(){
+				return <div className={"switch"+(this.state.on?" switch-on":"")} onClick={this.update.bind(this)}>
+					<Button/>
+				</div>;
+			}
+			update(){
+				this.setState((currentState)=>({on:!currentState.on}));
+			}
+			componentDidUpdate(){
+				//alert(this.state.on);
+			}
+		}
+		window.addEventListener("load", ()=>{
+			let ss=ReactDOM.render(<Switch/>, document.getElementById("switch-1"));
+			console.log(ss.state.on);
+			let ss2=ReactDOM.render(<Switch/>, document.getElementById("switch-2"));
+			console.log(ss2.state.on);
+		});
+	</script>
+</head>
+<body>
+	<div id="switch-1"></div>
+	<div style="height:10px"></div>
+	<div id="switch-2"></div>
+</body>
+</html>
