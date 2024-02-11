@@ -122,17 +122,26 @@
 		
 		// 建立超級圈圈叉叉組件
 		class SuperBoard extends React.Component{
+			// 超級圈圈叉叉組件的狀態
+			constructor(props){
+				super(props);
+				/*
+					框框在 marks 中的編號 (index)
+					0 1 2
+					3 4 5
+					6 7 8
+				*/
+
+				// 應用程式狀態
+				//this.state=redux.store.getState();
+			}
+
 			render(){
 				let boards=[];
 				
 				// 利用屬性傳遞框框的編號 (index), 框框的標記(mark) 和更新的回呼函式(update)
-				for (let i=0;i<this.state.marks.length;i++){					
-					cells.push(<Cell index={i} mark={this.state.marks[i]} update={this.updateMark.bind(this)} />);
-				}
-
-				// 利用屬性傳遞線段的開頭框框編號(startIndex) 和結束框框 (endIndex) 給 Line 組件
-				if (this.state.winner!==null){
-					cells.push(<Line startIndex={this.state.winner.startIndex} endIndex={this.state.winner.endIndex} />);
+				for (let i=0;i<9;i++){					
+					boards.push(<Board index={i} />);
 				}
 
 				return <div className="superBoard">{boards}</div>
@@ -216,7 +225,10 @@
 			});
 
 			// 初始化 React 的物件
-			ReactDOM.render(<Board/>, document.body);
+			//ReactDOM.render(<Board/>, document.body);
+
+			// 初始化 React 的物件
+			ReactDOM.render(<SuperBoard/>, document.body);
 		});
 
 	</script>
