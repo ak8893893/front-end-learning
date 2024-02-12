@@ -149,6 +149,8 @@
 			}
 		}
 		
+		// 建立計分板組件
+
 		// 以下是 Redux 相關程式碼
 		let redux={
 			store:null,  // 儲存空間會在初始化的時候處理
@@ -217,6 +219,7 @@
 			}
 		};
 
+		// 網頁讀取後進行初始化與渲染
 		window.addEventListener("load",()=>{
 			// 初始化 Redux 儲存空間
 			redux.store=Redux.createStore(redux.reducer, {
